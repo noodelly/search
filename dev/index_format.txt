@@ -1,0 +1,18 @@
+Use XML
+
+<page [name]> Specifies a new webpage </page>
+<index> Specifies an index </index>
+<rating> Specifies a rating for a webpage </rating>
+
+All attributes are optional
+
+
+
+
+
+
+Example:
+<index name="Website">
+	<page>A webpage</page>
+	<rating>90</rating>
+</index>

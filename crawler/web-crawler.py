@@ -34,6 +34,8 @@ def crawl(attrs):
         print("HTTP FOUND")
     elif target[:1] == "/":
         print("SUBDIR FOUND")
+    elif target[:1] == "#":
+        print("IGNORE: IS A IN-PAGE LINK")
         
 def request(seed): 
     print(seed)
@@ -51,6 +53,6 @@ def request(seed):
 def checkRobots():
     pass
         
-request(uncrawled[1])
+request(uncrawled[0])
     
     
