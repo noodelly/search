@@ -7,3 +7,7 @@
 	<page>Google Images</page>
 	<url>https://google.com/imghp</url>
 </index>
+<index>
+	<page>Wikipedia</page>
+	<url>https://wikipedia.org</url>
+</index>
