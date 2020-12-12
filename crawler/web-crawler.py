@@ -5,8 +5,7 @@ import sys
 import time
 from time import perf_counter
 
-uncrawled = ['https://wikipedia.org', 'https://google.com']
-crawled = []
+current_seed_index = 1
 
 class HTMLParse(HTMLParser):
     def handle_starttag(self, tag, attrs):
@@ -63,16 +62,27 @@ def request(seed):
         perf_end = perf_counter()
         elapsed = (perf_end - perf_start) * 1000
         writer(2, "[CRAWLED] " + seed +" at " + time.asctime(time.localtime(time.time())) + " (" + str(elapsed) + "ms)")
+        #read the uncrawled file
+        current_seed_index + 1
+        request(fetchNextSeed(current_seed_index))
     except:
-        crawled.append(seed)
+        #crawled.append(seed)
         print("GET FAIL: HOST COULD NOT BE REACHED")
         print("TRYING NEXT SEED")
+        current_seed_index + 1
+        request(fetchNextSeed(current_seed_index))
 
 def getTitle(response):
     title_origin = response.find("<title>")
     title_end = response.find("</title>")
     title = response[title_origin+7:title_end]
     return title
+
+def fetchNextSeed(line):
+    file = open("uncrawled.wcf", "r")
+    seed = file.readlines(line)
+    print(seed)
+    return seed
 
 def writer(type, data):
     if type == 0:   #uncrawled
