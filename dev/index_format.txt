@@ -1,18 +1,12 @@
-Use XML
-
-<page [name]> Specifies a new webpage </page>
+<page> Specifies a new webpage, inside of the tags is the extrapolated title </page>
 <index> Specifies an index </index>
 <rating> Specifies a rating for a webpage </rating>
-
-All attributes are optional
-
-
-
-
+<url> Specifies the URL of the index </url>
 
 
 Example:
-<index name="Website">
+<index>
 	<page>A webpage</page>
+	<url> https://awebpage.com </url>
 	<rating>90</rating>
 </index>
