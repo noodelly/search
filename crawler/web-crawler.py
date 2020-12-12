@@ -1,6 +1,7 @@
 from html.parser import HTMLParser
 import requests
 import os
+import sys
 
 uncrawled = ['https://wikipedia.org', 'https://google.com']
 crawled = []
@@ -34,8 +35,10 @@ def crawl(attrs):
         print("HTTP FOUND")
     elif target[:1] == "/":
         print("SUBDIR FOUND")
+
     elif target[:1] == "#":
         print("IGNORE: IS A IN-PAGE LINK")
+        pass
         
 def request(seed): 
     print(seed)
@@ -53,6 +56,6 @@ def request(seed):
 def checkRobots():
     pass
         
-request(uncrawled[0])
+request(sys.argv[1])
     
     
