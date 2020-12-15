@@ -74,7 +74,7 @@ def parseFlags(flags):
         pass
 
 def flushAllFiles():
-    f1 = open("uncrawled.wcf", "w")
+    f1 = open("uncrawled.xml", "w")
     file.write("")
     file.close()
     f2 = open("debug.log", "w")
@@ -88,13 +88,13 @@ def getTitle(response):
     return title
 
 def fetchNextSeed(line):
-    file = open("uncrawled.wcf", "r")
+    file = open("uncrawled.xml", "r")
     seed = file.readlines(line)[0]
     return seed
 
 def writer(type, data):
     if type == 0:   #uncrawled
-        file = open("uncrawled.wcf", "a")
+        file = open("uncrawled.xml", "a")
         file.writelines(data)
         file.write("\n")
         file.close()
