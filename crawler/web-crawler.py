@@ -5,8 +5,6 @@ import sys
 import time
 from time import perf_counter
 
-current_seed_index = 1
-
 class HTMLParse(HTMLParser):
     def handle_starttag(self, tag, attrs):
         if tag == 'a':
@@ -48,6 +46,7 @@ def crawl(attrs):
         pass
         
 def request(seed): 
+    #parseFlags(seed)
     print(seed)
     perf_start = perf_counter()
     try:
@@ -63,14 +62,24 @@ def request(seed):
         elapsed = (perf_end - perf_start) * 1000
         writer(2, "[CRAWLED] " + seed +" at " + time.asctime(time.localtime(time.time())) + " (" + str(elapsed) + "ms)")
         #read the uncrawled file
-        current_seed_index + 1
-        request(fetchNextSeed(current_seed_index))
     except:
         #crawled.append(seed)
         print("GET FAIL: HOST COULD NOT BE REACHED")
         print("TRYING NEXT SEED")
-        current_seed_index + 1
-        request(fetchNextSeed(current_seed_index))
+
+def parseFlags(flags):
+    if sys.argv[1] == "-f" and sys.argv[2] == "all":
+        flushAllFiles()
+    else:
+        pass
+
+def flushAllFiles():
+    f1 = open("uncrawled.wcf", "w")
+    file.write("")
+    file.close()
+    f2 = open("debug.log", "w")
+    file.write("")
+    file.close()
 
 def getTitle(response):
     title_origin = response.find("<title>")
@@ -80,14 +89,14 @@ def getTitle(response):
 
 def fetchNextSeed(line):
     file = open("uncrawled.wcf", "r")
-    seed = file.readlines(line)
-    print(seed)
+    seed = file.readlines(line)[0]
     return seed
 
 def writer(type, data):
     if type == 0:   #uncrawled
         file = open("uncrawled.wcf", "a")
-        file.write("\n" + data)
+        file.writelines(data)
+        file.write("\n")
         file.close()
     elif type == 1: #crawled
         file = open("crawled.wcf", "a")
@@ -111,7 +120,13 @@ def writeIndex(title, url):
 
 def checkRobots():
     pass
-        
+
+TIMEOUT_MAX = 10
+
+current_seed_index = 0
 request(sys.argv[1])
+while 1: 
+    current_seed_index + 1       
+    request(fetchNextSeed(current_seed_index))
     
     
