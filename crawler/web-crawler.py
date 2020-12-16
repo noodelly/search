@@ -46,7 +46,7 @@ def crawl(attrs):
         pass
         
 def request(seed): 
-    #parseFlags(seed)
+    parseFlags(seed)
     print(seed)
     perf_start = perf_counter()
     try:
@@ -66,6 +66,7 @@ def request(seed):
         #crawled.append(seed)
         print("GET FAIL: HOST COULD NOT BE REACHED")
         print("TRYING NEXT SEED")
+        pass
 
 def parseFlags(flags):
     if sys.argv[1] == "-f" and sys.argv[2] == "all":
@@ -75,11 +76,12 @@ def parseFlags(flags):
 
 def flushAllFiles():
     f1 = open("uncrawled.wcf", "w")
-    file.write("")
-    file.close()
+    f1.write("")
+    f1.close()
     f2 = open("debug.log", "w")
-    file.write("")
-    file.close()
+    f2.write("")
+    f2.close()
+    exit(0)
 
 def getTitle(response):
     title_origin = response.find("<title>")
@@ -90,6 +92,7 @@ def getTitle(response):
 def fetchNextSeed(line):
     file = open("uncrawled.wcf", "r")
     seed = file.readlines(line)[0]
+    seed = seed.replace("\n", "")
     return seed
 
 def writer(type, data):
